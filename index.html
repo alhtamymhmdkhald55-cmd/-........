@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>خريطة الحاجة الآن</title>
+<link rel="manifest" href="manifest.json"><meta name="theme-color" content="#000000"><link rel="icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Reem+Kufi:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff;--cd:#fbf6f6;--tx:#1a0f0f;--mu:#7d6a6a;--ac:#8b1a1a;--gr:linear-gradient(135deg,#a32020,#6b0f0f);--bd:#efe0e0;--sh:0 6px 20px #6b0f0f1a;--ok:#15803d;--wa:#b45309;--no:#b91c1c;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#000;--cd:#05070c;--tx:#f2f6ff;--mu:#7f93bd;--ac:#3b82f6;--gr:linear-gradient(135deg,#2563eb,#1e40af);--bd:#10285a;--sh:0 6px 22px #2563eb2e;--ok:#4ade80;--wa:#fbbf24;--no:#f87171;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#000;--cd:#05070c;--tx:#f2f6ff;--mu:#7f93bd;--ac:#3b82f6;--gr:linear-gradient(135deg,#2563eb,#1e40af);--bd:#10285a;--sh:0 6px 22px #2563eb2e;--ok:#4ade80;--wa:#fbbf24;--no:#f87171;color-scheme:dark}
+*{-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+html,body{margin:0;background:var(--bg);color:var(--tx);font-family:"IBM Plex Sans Arabic",system-ui,Tahoma,sans-serif;transition:background .3s,color .3s}
+body{max-width:560px;margin:0 auto;padding:14px 14px 100px}
+button,input,select,textarea{font-family:inherit}
+.hd{display:flex;align-items:center;gap:8px;margin-bottom:14px}
+.hd h1{flex:1;font:700 22px "Reem Kufi",sans-serif;margin:0;display:flex;align-items:center;gap:8px;background:var(--gr);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hd h1 svg{color:var(--ac)}
+.ic{display:inline-flex;vertical-align:middle}
+.ib{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;background:var(--cd);border:1px solid var(--bd);border-radius:12px;color:var(--tx);cursor:pointer;transition:transform .15s,box-shadow .2s}
+.ib:active{transform:scale(.92)}.ib.w{color:#fff;background:#16a34a;border-color:#16a34a}
+#bn{position:relative;aspect-ratio:16/8;background:var(--cd);border:1px solid var(--bd);border-radius:18px;overflow:hidden;display:flex;align-items:center;justify-content:center;margin-bottom:14px;cursor:pointer;box-shadow:var(--sh);transition:transform .2s}
+#bn:active{transform:scale(.99)}#bn video,#bn img{width:100%;height:100%;object-fit:cover}
+.ph{color:var(--mu);font-weight:600;display:flex;flex-direction:column;align-items:center;gap:6px}
+.tag{position:absolute;top:10px;left:10px;background:var(--gr);color:#fff;border-radius:99px;padding:4px 12px;font-size:12px;font-weight:600}
+select,input,textarea{width:100%;box-sizing:border-box;padding:12px;border:1px solid var(--bd);border-radius:12px;background:var(--cd);color:var(--tx);font-size:15px;margin-bottom:9px;outline:none;transition:border .2s}
+select:focus,input:focus,textarea:focus{border-color:var(--ac)}
+.chips{display:flex;gap:7px;overflow-x:auto;padding:4px 2px 12px;scrollbar-width:none}.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:99px;border:1px solid var(--bd);background:var(--cd);color:var(--tx);font-size:14px;cursor:pointer;transition:all .2s}
+.chip.on{background:var(--gr);color:#fff;border-color:transparent;box-shadow:var(--sh)}
+.card{position:relative;background:var(--cd);border:1px solid var(--bd);border-radius:16px;padding:14px;margin-bottom:10px;cursor:pointer;box-shadow:var(--sh);animation:in .35s ease both;transition:transform .15s}
+.card:active{transform:scale(.985)}
+@keyframes in{from{opacity:0;transform:translateY(10px)}}@keyframes up{from{transform:translateY(60px);opacity:0}}
+.r{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.t{font-weight:600;display:flex;align-items:center;gap:8px}.t .ic{color:var(--ac)}
+.m{color:var(--mu);font-size:13px;margin-top:6px;line-height:1.6}
+.b{padding:3px 11px;border-radius:99px;font-size:12.5px;font-weight:600;border:1px solid currentColor;white-space:nowrap}
+.ok{color:var(--ok)}.wa{color:var(--wa)}.no{color:var(--no)}
+.fab{position:fixed;bottom:calc(18px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:8px;background:var(--gr);color:#fff;border:0;border-radius:99px;padding:15px 30px;font-size:16px;font-weight:700;box-shadow:0 8px 24px #0006;cursor:pointer;transition:transform .15s}
+.fab:active{transform:translateX(-50%) scale(.95)}
+#md{display:none;position:fixed;inset:0;background:#0009;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);z-index:5;align-items:flex-end}#md.o{display:flex}
+#mb{background:var(--bg);width:100%;max-width:560px;margin:0 auto;border-radius:24px 24px 0 0;padding:18px;max-height:92%;overflow:auto;box-sizing:border-box;border:1px solid var(--bd);animation:up .3s ease}
+#mb h2{font:700 19px "Reem Kufi",sans-serif;margin:0 0 6px}
+.go{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;box-sizing:border-box;text-decoration:none;background:var(--gr);color:#fff;border:0;border-radius:12px;padding:13px;font-size:15px;font-weight:600;margin-top:9px;cursor:pointer;transition:transform .15s}
+.go:active{transform:scale(.97)}.go.g{background:#16a34a}.go.rd{background:#dc2626}.go.s{background:none;color:var(--mu);font-weight:400}.go.o2{background:var(--cd);color:var(--tx);border:1px solid var(--bd)}
+.num{font-size:28px;font-weight:700;letter-spacing:2px;text-align:center;background:var(--cd);border:1.5px dashed var(--ac);border-radius:14px;padding:14px;margin:12px 0 4px;direction:ltr;color:var(--ac)}
+.mp{height:110px;border-radius:14px;border:1px solid var(--bd);margin:12px 0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:var(--ac);background-color:var(--cd);background-image:linear-gradient(var(--bd) 1px,transparent 1px),linear-gradient(90deg,var(--bd) 1px,transparent 1px);background-size:22px 22px}
+.mp small{font-size:12px;color:var(--mu);direction:ltr}
+.sg{display:flex;gap:6px;margin:4px 0 10px}.sg button{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 4px;border:1px solid var(--bd);border-radius:12px;background:var(--cd);color:var(--mu);font-size:12.5px;cursor:pointer;transition:all .2s}
+.sg button.on{border-color:var(--ac);color:var(--ac);background:var(--bg);box-shadow:var(--sh)}
+.e{text-align:center;color:var(--mu);padding:36px 10px}
+.pb{display:flex;align-items:center;gap:10px;width:100%;box-sizing:border-box;padding:12px;border:1px solid var(--bd);border-radius:12px;background:var(--cd);color:var(--tx);font-size:15px;margin-bottom:9px;cursor:pointer;transition:border .2s}
+.pb:active{border-color:var(--ac)}.pb span.ic:first-child{color:var(--ac)}.pb>span:nth-child(2){flex:1;text-align:start}
+.fb{display:flex;gap:8px;margin-bottom:10px}.fb .pb{margin:0;flex:1;padding:10px;font-size:14px}
+.pk{max-height:46vh;overflow:auto;margin:4px 0}.pr{display:block;width:100%;text-align:start;padding:13px 12px;border:0;border-bottom:1px solid var(--bd);background:none;color:var(--tx);font-size:15px;cursor:pointer}
+.pr.on{color:var(--ac);font-weight:600}.pr:active{background:var(--cd)}
+#lg{font:700 13px "IBM Plex Sans Arabic",sans-serif}.hd h1{font-size:19px}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}
+.tile{display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 4px;border-radius:16px;border:1px solid var(--bd);background:var(--cd);color:var(--tx);font-size:12.5px;cursor:pointer;transition:all .2s;text-align:center}
+.tile .ic{width:40px;height:40px;border-radius:12px;background:var(--bd);align-items:center;justify-content:center;color:var(--ac)}
+.tile.on{background:var(--gr);color:#fff;border-color:transparent;box-shadow:var(--sh)}.tile.on .ic{background:#ffffff30;color:#fff}.tile:active{transform:scale(.95)}
+#ch.tiles{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:2px 2px 6px;margin-bottom:8px}#ch.tiles::-webkit-scrollbar{display:none}#ch .tile{flex:0 0 78px;scroll-snap-align:start}
+.ft{display:flex;align-items:center;gap:6px;margin:18px auto 0;background:none;border:0;color:var(--mu);font-size:13px;cursor:pointer}
+</style>
+<script>try{var _t=localStorage.getItem("th");if(_t)document.documentElement.dataset.theme=_t}catch(e){}</script>
+</head>
+<body>
+<div class="hd"><h1 id="ti"></h1><a class="ib w" id="wa" target="_blank" rel="noopener" aria-label="واتساب"></a><button class="ib" id="lg" aria-label="Language"></button><button class="ib" id="tg" aria-label="الوضع"></button></div>
+<div id="bn"></div>
+<div class="fb" id="fb"></div>
+<div class="tiles" id="ch"></div>
+<div id="ls"></div>
+<button class="ft" id="sh"></button>
+<button class="fab" id="add"></button>
+<div id="md"><div id="mb"></div></div>
+<script>
+var IC={flame:'<path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.4-.5-2-1-3-1.1-2.1-.2-4.1 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.2.4-2.300 1-3a2.5 2.5 0 0 0 2.500 2.500z"/>',
+fuel:'<path d="M3 22V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v17M3 22h12M6 9h6M15 9h2a2 2 0 0 1 2 2v5a1.500 1.500 0 0 0 3 0V9l-3-3"/>',
+drum:'<path d="M5 5c0-1.100 3.100-2 7-2s7 .9 7 2v14c0 1.100-3.100 2-7 2s-7-.9-7-2zM5 5c0 1.100 3.100 2 7 2s7-.9 7-2M5 12c0 1.100 3.100 2 7 2s7-.9 7-2"/>',
+drop:'<path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.900-3-5.500S12.500 5.500 12 3c-.5 2.500-2 4.900-4 6.500S5 13 5 15a7 7 0 0 0 7 7z"/>',
+zap:'<path d="M13 2 3 14h9l-1 8 10-12h-9z"/>',
+cash:'<rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.500"/><path d="M6 12h.01M18 12h.01"/>',
+pin:'<path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/>',
+sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.900 4.900l1.400 1.400M17.700 17.700l1.400 1.400M2 12h2M20 12h2M4.900 19.100l1.400-1.400M17.700 6.300l1.400-1.400"/>',
+moon:'<path d="M21 12.800A9 9 0 1 1 11.200 3a7 7 0 0 0 9.800 9.800z"/>',
+plus:'<path d="M12 5v14M5 12h14"/>',copy:'<rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>',
+check:'<path d="M20 6 9 17l-5-5"/>',nav:'<path d="m3 11 19-9-9 19-2-8z"/>',edit:'<path d="M12 20h9M16.500 3.500a2.100 2.100 0 0 1 3 3L7 19l-4 1 1-4z"/>',
+map:'<path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3zM9 3v15M15 6v15"/>',gps:'<circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="8"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>',
+mega:'<path d="m3 11 18-5v12L3 14zM11.600 16.800a3 3 0 1 1-5.800-1.600"/>',trash:'<path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6M10 11v6M14 11v6"/>'};
+var WAP="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.3-.15-1.263-.465-2.403-1.485-.888-.795-1.484-1.77-1.66-2.07-.174-.3-.019-.465.13-.615.136-.135.301-.345.451-.523.146-.181.194-.301.297-.496.1-.21.049-.375-.025-.524-.075-.15-.672-1.62-.922-2.206-.24-.584-.487-.51-.672-.51-.172-.015-.371-.015-.571-.015-.2 0-.523.074-.797.359-.273.3-1.045 1.02-1.045 2.475s1.07 2.865 1.219 3.075c.149.18 2.095 3.195 5.076 4.483.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414-.074-.123-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z";
+function mp(s){var o={};s.split("|").forEach(function(x){var i=x.indexOf("=");o[x.slice(0,i)]=x.slice(i+1)});return o}
+var K={gas:["غاز","flame","Gas"],pet:["بترول","fuel","Petrol"],dsl:["ديزل","drum","Diesel"],wat:["ماء","drop","Water"],el:["كهرباء","zap","Electricity"],fx:["صرف","cash","Exchange"],gld:["ذهب","gem","Gold"]};
+IC.gem='<path d="M6 3h12l4 6-10 12L2 9z"/><path d="M2 9h20M9 3l-2 6 5 12 5-12-2-6"/>';
+IC.tag='<path d="M20.6 13.4l-7.2 7.2a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1"/>';
+IC.globe='<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>';
+IC.down='<path d="m6 9 6 6 6-6"/>';
+IC.shield='<path d="M12 3l8 3v6c0 5-3.500 8-8 9-4.500-1-8-4-8-9V6z"/>';
+IC.flag='<path d="M5 21V4M5 4h11l-2 4 2 4H5"/>';
+var CC={"صنعاء":[15.3694,44.191],"عدن":[12.7855,45.0187],"تعز":[13.5795,44.0209],"إب":[13.9759,44.1709],"الحديدة":[14.7978,42.9545],"المكلا":[14.5425,49.1242],"ذمار":[14.5427,44.4051],"سيئون":[15.9433,48.7873],"مأرب":[15.4542,45.3265],"صعدة":[16.9402,43.7639],"حجة":[15.6942,43.6033],"عمران":[15.6594,43.9439],"البيضاء":[13.986,45.571],"الحوطة (لحج)":[13.0582,44.8837],"زنجبار (أبين)":[13.1286,45.38],"عتق (شبوة)":[14.537,46.832],"الضالع":[13.6958,44.7314],"المحويت":[15.47,43.544],"الجبين (ريمة)":[14.55,43.72],"الحزم (الجوف)":[16.1544,44.7769],"الغيضة (المهرة)":[16.2078,52.176],"حديبو (سقطرى)":[12.65,54.02],"تريم":[16.05,49],"الشحر":[14.76,49.6],"رداع":[14.4167,44.8333],"يريم":[14.2967,44.3786],"زبيد":[14.195,43.315],"المخا":[13.32,43.25],"باجل":[14.85,43.2667],"حرض":[16.4,43.05],"ميدي":[16.3,42.8],"لودر":[13.88,45.88],"الخوخة":[13.13,43.25],"أخرى":[15.5,47.5]};
+var W="السعودية:الرياض،جدة،مكة المكرمة،المدينة المنورة،الدمام،الطائف،أبها،جازان،نجران،تبوك|عُمان:مسقط،صلالة،صحار،نزوى|الإمارات:أبوظبي،دبي،الشارقة،العين،عجمان|قطر:الدوحة،الريان|الكويت:مدينة الكويت،حولي|البحرين:المنامة|العراق:بغداد،البصرة،الموصل،أربيل،النجف،كربلاء|سوريا:دمشق،حلب،حمص،اللاذقية|لبنان:بيروت،طرابلس،صيدا|الأردن:عمّان،إربد،الزرقاء،العقبة|فلسطين:القدس،غزة،رام الله،نابلس|مصر:القاهرة،الإسكندرية،الجيزة،أسوان،الأقصر،بورسعيد،السويس|ليبيا:طرابلس،بنغازي،مصراتة|تونس:تونس،صفاقس،سوسة|الجزائر:الجزائر،وهران،قسنطينة|المغرب:الرباط،الدار البيضاء،مراكش،فاس،طنجة|موريتانيا:نواكشوط|السودان:الخرطوم،أم درمان،بورتسودان|الصومال:مقديشو،هرجيسا|جيبوتي:جيبوتي|جزر القمر:موروني|تركيا:أنقرة،إسطنبول،إزمير|إيران:طهران،مشهد،أصفهان|باكستان:إسلام آباد،كراتشي،لاهور|الهند:نيودلهي،مومباي،بنغالور،حيدرآباد|بنغلاديش:دكا|أفغانستان:كابول|إندونيسيا:جاكرتا،سورابايا|ماليزيا:كوالالمبور|تايلاند:بانكوك|الفلبين:مانيلا|فيتنام:هانوي|الصين:بكين،شنغهاي،قوانغتشو|اليابان:طوكيو،أوساكا|كوريا الجنوبية:سيول،بوسان|روسيا:موسكو،سانت بطرسبرغ|ألمانيا:برلين،ميونخ،فرانكفورت|فرنسا:باريس،مرسيليا،ليون|بريطانيا:لندن،مانشستر،برمنغهام|إسبانيا:مدريد،برشلونة|إيطاليا:روما،ميلانو|هولندا:أمستردام|السويد:ستوكهولم|أمريكا:واشنطن،نيويورك،لوس أنجلوس،شيكاغو،هيوستن|كندا:أوتاوا،تورنتو،مونتريال|أستراليا:كانبيرا،سيدني،ملبورن|البرازيل:برازيليا،ساو باولو|أذربيجان:باكو|أرمينيا:يريفان|إريتريا:أسمرة|إسواتيني:مباباني|إستونيا:تالين|أوغندا:كمبالا|أوكرانيا:كييف|أوزبكستان:طشقند|أوروغواي:مونتيفيديو|إثيوبيا:أديس أبابا|الأرجنتين:بوينس آيرس|ألبانيا:تيرانا|أنغولا:لواندا|أيرلندا:دبلن|آيسلندا:ريكيافيك|بيلاروسيا:مينسك|بلجيكا:بروكسل|بلغاريا:صوفيا|البوسنة والهرسك:سراييفو|بولندا:وارسو|بوليفيا:لاباز|بيرو:ليما|بنين:بورتو نوفو|بوتسوانا:غابورون|بوركينا فاسو:واغادوغو|بوروندي:جيتيغا|بنما:بنما|بوتان:تيمفو|بروناي:بندر سري بجاوان|بابوا غينيا الجديدة:بورت مورسبي|باراغواي:أسونسيون|الباهاما:ناسو|بربادوس:بريدجتاون|بليز:بلموبان|التشيك:براغ|تشاد:نجامينا|تشيلي:سانتياغو|تنزانيا:دودوما،دار السلام|توغو:لومي|تركمانستان:عشق آباد|طاجيكستان:دوشنبي|ترينيداد وتوباغو:بورت أوف سبين|تيمور الشرقية:ديلي|جورجيا:تبليسي|جامايكا:كينغستون|جنوب أفريقيا:بريتوريا،جوهانسبرغ،كيب تاون|جنوب السودان:جوبا|جمهورية الكونغو:برازافيل|الكونغو الديمقراطية:كينشاسا|أفريقيا الوسطى:بانغي|الدنمارك:كوبنهاغن|دومينيكا:روزو|الدومينيكان:سانتو دومينغو|رواندا:كيغالي|رومانيا:بوخارست|زامبيا:لوساكا|زيمبابوي:هراري|السنغال:داكار|سيراليون:فريتاون|سنغافورة:سنغافورة|سلوفاكيا:براتيسلافا|سلوفينيا:ليوبليانا|سريلانكا:كولومبو|سويسرا:برن،زيورخ،جنيف|سورينام:باراماريبو|السلفادور:سان سلفادور|سيشل:فيكتوريا|صربيا:بلغراد|غانا:أكرا|غينيا:كوناكري|غينيا بيساو:بيساو|غينيا الاستوائية:مالابو|غامبيا:بانجول|الغابون:ليبرفيل|غواتيمالا:مدينة غواتيمالا|غيانا:جورج تاون|فنلندا:هلسنكي|فنزويلا:كاراكاس|فيجي:سوفا|قبرص:نيقوسيا|قيرغيزستان:بشكيك|كازاخستان:أستانا،ألماتي|كرواتيا:زغرب|كمبوديا:بنوم بنه|كوبا:هافانا|كوستاريكا:سان خوسيه|كولومبيا:بوغوتا|ساحل العاج:ياموسوكرو،أبيدجان|الكاميرون:ياوندي،دوالا|كينيا:نيروبي|لاوس:فيينتيان|لاتفيا:ريغا|ليتوانيا:فيلنيوس|لوكسمبورغ:لوكسمبورغ|ليبيريا:مونروفيا|ليسوتو:ماسيرو|مدغشقر:أنتاناناريفو|مالاوي:ليلونغوي|مالي:باماكو|مالطا:فاليتا|المكسيك:مكسيكو سيتي|منغوليا:أولان باتور|مولدوفا:كيشيناو|موزمبيق:مابوتو|ميانمار:نايبيداو،يانغون|ناميبيا:ويندهوك|نيبال:كاتماندو|النيجر:نيامي|نيجيريا:أبوجا،لاغوس|نيكاراغوا:ماناغوا|نيوزيلندا:ويلينغتون،أوكلاند|هندوراس:تيغوسيغالبا|هايتي:بورت أو برنس|هنغاريا:بودابست|النمسا:فيينا|النرويج:أوسلو|البرتغال:لشبونة|اليونان:أثينا|مقدونيا الشمالية:سكوبيه|الجبل الأسود:بودغوريتسا|كوريا الشمالية:بيونغ يانغ|ساو تومي:ساو تومي|الرأس الأخضر:برايا|موريشيوس:بورت لويس|إسرائيل:تل أبيب،حيفا|جزر المالديف:ماليه|تايوان:تايبيه|أندورا:أندورا لا فيلا|ليختنشتاين:فادوز|موناكو:موناكو|سان مارينو:سان مارينو|الفاتيكان:الفاتيكان|كوسوفو:بريشتينا|أنتيغوا وبربودا:سانت جونز|غرينادا:سانت جورجز|سانت كيتس ونيفيس:باستير|سانت لوسيا:كاستريز|سانت فينسنت والغرينادين:كينغستاون|ساموا:أبيا|تونغا:نوكوألوفا|فانواتو:بورت فيلا|جزر سليمان:هونيارا|كيريباتي:تاراوا|توفالو:فونافوتي|ناورو:ياريين|بالاو:نغيرولمود|جزر مارشال:ماجورو|ميكرونيزيا:باليكير";
+var ENC=mp("اليمن=Yemen|السعودية=Saudi Arabia|عُمان=Oman|الإمارات=UAE|قطر=Qatar|الكويت=Kuwait|البحرين=Bahrain|العراق=Iraq|سوريا=Syria|لبنان=Lebanon|الأردن=Jordan|فلسطين=Palestine|مصر=Egypt|ليبيا=Libya|تونس=Tunisia|الجزائر=Algeria|المغرب=Morocco|موريتانيا=Mauritania|السودان=Sudan|الصومال=Somalia|جيبوتي=Djibouti|جزر القمر=Comoros|تركيا=Turkey|إيران=Iran|باكستان=Pakistan|الهند=India|بنغلاديش=Bangladesh|أفغانستان=Afghanistan|إندونيسيا=Indonesia|ماليزيا=Malaysia|تايلاند=Thailand|الفلبين=Philippines|فيتنام=Vietnam|الصين=China|اليابان=Japan|كوريا الجنوبية=South Korea|روسيا=Russia|ألمانيا=Germany|فرنسا=France|بريطانيا=United Kingdom|إسبانيا=Spain|إيطاليا=Italy|هولندا=Netherlands|السويد=Sweden|أمريكا=United States|كندا=Canada|أستراليا=Australia|البرازيل=Brazil|أذربيجان=Azerbaijan|أرمينيا=Armenia|إريتريا=Eritrea|إسواتيني=Eswatini|إستونيا=Estonia|أوغندا=Uganda|أوكرانيا=Ukraine|أوزبكستان=Uzbekistan|أوروغواي=Uruguay|إثيوبيا=Ethiopia|الأرجنتين=Argentina|ألبانيا=Albania|أنغولا=Angola|أيرلندا=Ireland|آيسلندا=Iceland|بيلاروسيا=Belarus|بلجيكا=Belgium|بلغاريا=Bulgaria|البوسنة والهرسك=Bosnia and Herzegovina|بولندا=Poland|بوليفيا=Bolivia|بيرو=Peru|بنين=Benin|بوتسوانا=Botswana|بوركينا فاسو=Burkina Faso|بوروندي=Burundi|بنما=Panama|بوتان=Bhutan|بروناي=Brunei|بابوا غينيا الجديدة=Papua New Guinea|باراغواي=Paraguay|الباهاما=Bahamas|بربادوس=Barbados|بليز=Belize|التشيك=Czechia|تشاد=Chad|تشيلي=Chile|تنزانيا=Tanzania|توغو=Togo|تركمانستان=Turkmenistan|طاجيكستان=Tajikistan|ترينيداد وتوباغو=Trinidad and Tobago|تيمور الشرقية=Timor-Leste|جورجيا=Georgia|جامايكا=Jamaica|جنوب أفريقيا=South Africa|جنوب السودان=South Sudan|جمهورية الكونغو=Republic of the Congo|الكونغو الديمقراطية=DR Congo|أفريقيا الوسطى=Central African Republic|الدنمارك=Denmark|دومينيكا=Dominica|الدومينيكان=Dominican Republic|رواندا=Rwanda|رومانيا=Romania|زامبيا=Zambia|زيمبابوي=Zimbabwe|السنغال=Senegal|سيراليون=Sierra Leone|سنغافورة=Singapore|سلوفاكيا=Slovakia|سلوفينيا=Slovenia|سريلانكا=Sri Lanka|سويسرا=Switzerland|سورينام=Suriname|السلفادور=El Salvador|سيشل=Seychelles|صربيا=Serbia|غانا=Ghana|غينيا=Guinea|غينيا بيساو=Guinea-Bissau|غينيا الاستوائية=Equatorial Guinea|غامبيا=Gambia|الغابون=Gabon|غواتيمالا=Guatemala|غيانا=Guyana|فنلندا=Finland|فنزويلا=Venezuela|فيجي=Fiji|قبرص=Cyprus|قيرغيزستان=Kyrgyzstan|كازاخستان=Kazakhstan|كرواتيا=Croatia|كمبوديا=Cambodia|كوبا=Cuba|كوستاريكا=Costa Rica|كولومبيا=Colombia|ساحل العاج=Ivory Coast|الكاميرون=Cameroon|كينيا=Kenya|لاوس=Laos|لاتفيا=Latvia|ليتوانيا=Lithuania|لوكسمبورغ=Luxembourg|ليبيريا=Liberia|ليسوتو=Lesotho|مدغشقر=Madagascar|مالاوي=Malawi|مالي=Mali|مالطا=Malta|المكسيك=Mexico|منغوليا=Mongolia|مولدوفا=Moldova|موزمبيق=Mozambique|ميانمار=Myanmar|ناميبيا=Namibia|نيبال=Nepal|النيجر=Niger|نيجيريا=Nigeria|نيكاراغوا=Nicaragua|نيوزيلندا=New Zealand|هندوراس=Honduras|هايتي=Haiti|هنغاريا=Hungary|النمسا=Austria|النرويج=Norway|البرتغال=Portugal|اليونان=Greece|مقدونيا الشمالية=North Macedonia|الجبل الأسود=Montenegro|كوريا الشمالية=North Korea|ساو تومي=Sao Tome and Principe|الرأس الأخضر=Cape Verde|موريشيوس=Mauritius|إسرائيل=Israel|جزر المالديف=Maldives|تايوان=Taiwan|أندورا=Andorra|ليختنشتاين=Liechtenstein|موناكو=Monaco|سان مارينو=San Marino|الفاتيكان=Vatican City|كوسوفو=Kosovo|أنتيغوا وبربودا=Antigua and Barbuda|غرينادا=Grenada|سانت كيتس ونيفيس=Saint Kitts and Nevis|سانت لوسيا=Saint Lucia|سانت فينسنت والغرينادين=Saint Vincent and the Grenadines|ساموا=Samoa|تونغا=Tonga|فانواتو=Vanuatu|جزر سليمان=Solomon Islands|كيريباتي=Kiribati|توفالو=Tuvalu|ناورو=Nauru|بالاو=Palau|جزر مارشال=Marshall Islands|ميكرونيزيا=Micronesia"),ENT=mp("صنعاء=Sanaa|عدن=Aden|تعز=Taiz|إب=Ibb|الحديدة=Hodeidah|المكلا=Mukalla|ذمار=Dhamar|سيئون=Seiyun|مأرب=Marib|صعدة=Saada|حجة=Hajjah|عمران=Amran|البيضاء=Al Bayda|الحوطة (لحج)=Al Hawta (Lahj)|زنجبار (أبين)=Zinjibar (Abyan)|عتق (شبوة)=Ataq (Shabwah)|الضالع=Ad Dhale|المحويت=Al Mahwit|الجبين (ريمة)=Al Jabin (Raymah)|الحزم (الجوف)=Al Hazm (Al Jawf)|الغيضة (المهرة)=Al Ghaydah (Al Mahrah)|حديبو (سقطرى)=Hadibu (Socotra)|تريم=Tarim|الشحر=Ash Shihr|رداع=Rada|يريم=Yarim|زبيد=Zabid|المخا=Mocha|باجل=Bajil|حرض=Harad|ميدي=Midi|لودر=Lawdar|الخوخة=Al Khawkhah|الرياض=Riyadh|جدة=Jeddah|مكة المكرمة=Mecca|المدينة المنورة=Medina|الدمام=Dammam|الطائف=Taif|أبها=Abha|جازان=Jazan|نجران=Najran|تبوك=Tabuk|مسقط=Muscat|صلالة=Salalah|صحار=Sohar|نزوى=Nizwa|أبوظبي=Abu Dhabi|دبي=Dubai|الشارقة=Sharjah|العين=Al Ain|عجمان=Ajman|الدوحة=Doha|الريان=Al Rayyan|مدينة الكويت=Kuwait City|حولي=Hawalli|المنامة=Manama|بغداد=Baghdad|البصرة=Basra|الموصل=Mosul|أربيل=Erbil|النجف=Najaf|كربلاء=Karbala|دمشق=Damascus|حلب=Aleppo|حمص=Homs|اللاذقية=Latakia|بيروت=Beirut|طرابلس=Tripoli|صيدا=Sidon|عمّان=Amman|إربد=Irbid|الزرقاء=Zarqa|العقبة=Aqaba|القدس=Jerusalem|غزة=Gaza|رام الله=Ramallah|نابلس=Nablus|القاهرة=Cairo|الإسكندرية=Alexandria|الجيزة=Giza|أسوان=Aswan|الأقصر=Luxor|بورسعيد=Port Said|السويس=Suez|بنغازي=Benghazi|مصراتة=Misrata|تونس=Tunis|صفاقس=Sfax|سوسة=Sousse|الجزائر=Algiers|وهران=Oran|قسنطينة=Constantine|الرباط=Rabat|الدار البيضاء=Casablanca|مراكش=Marrakesh|فاس=Fez|طنجة=Tangier|نواكشوط=Nouakchott|الخرطوم=Khartoum|أم درمان=Omdurman|بورتسودان=Port Sudan|مقديشو=Mogadishu|هرجيسا=Hargeisa|جيبوتي=Djibouti|موروني=Moroni|أنقرة=Ankara|إسطنبول=Istanbul|إزمير=Izmir|طهران=Tehran|مشهد=Mashhad|أصفهان=Isfahan|إسلام آباد=Islamabad|كراتشي=Karachi|لاهور=Lahore|نيودلهي=New Delhi|مومباي=Mumbai|بنغالور=Bengaluru|حيدرآباد=Hyderabad|دكا=Dhaka|كابول=Kabul|جاكرتا=Jakarta|سورابايا=Surabaya|كوالالمبور=Kuala Lumpur|بانكوك=Bangkok|مانيلا=Manila|هانوي=Hanoi|بكين=Beijing|شنغهاي=Shanghai|قوانغتشو=Guangzhou|طوكيو=Tokyo|أوساكا=Osaka|سيول=Seoul|بوسان=Busan|موسكو=Moscow|سانت بطرسبرغ=Saint Petersburg|برلين=Berlin|ميونخ=Munich|فرانكفورت=Frankfurt|باريس=Paris|مرسيليا=Marseille|ليون=Lyon|لندن=London|مانشستر=Manchester|برمنغهام=Birmingham|مدريد=Madrid|برشلونة=Barcelona|روما=Rome|ميلانو=Milan|أمستردام=Amsterdam|ستوكهولم=Stockholm|واشنطن=Washington|نيويورك=New York|لوس أنجلوس=Los Angeles|شيكاغو=Chicago|هيوستن=Houston|أوتاوا=Ottawa|تورنتو=Toronto|مونتريال=Montreal|كانبيرا=Canberra|سيدني=Sydney|ملبورن=Melbourne|برازيليا=Brasilia|ساو باولو=Sao Paulo|باكو=Baku|يريفان=Yerevan|أسمرة=Asmara|مباباني=Mbabane|تالين=Tallinn|كمبالا=Kampala|كييف=Kyiv|طشقند=Tashkent|مونتيفيديو=Montevideo|أديس أبابا=Addis Ababa|بوينس آيرس=Buenos Aires|تيرانا=Tirana|لواندا=Luanda|دبلن=Dublin|ريكيافيك=Reykjavik|مينسك=Minsk|بروكسل=Brussels|صوفيا=Sofia|سراييفو=Sarajevo|وارسو=Warsaw|لاباز=La Paz|ليما=Lima|بورتو نوفو=Porto-Novo|غابورون=Gaborone|واغادوغو=Ouagadougou|جيتيغا=Gitega|بنما=Panama City|تيمفو=Thimphu|بندر سري بجاوان=Bandar Seri Begawan|بورت مورسبي=Port Moresby|أسونسيون=Asuncion|ناسو=Nassau|بريدجتاون=Bridgetown|بلموبان=Belmopan|براغ=Prague|نجامينا=NDjamena|سانتياغو=Santiago|دودوما=Dodoma|دار السلام=Dar es Salaam|لومي=Lome|عشق آباد=Ashgabat|دوشنبي=Dushanbe|بورت أوف سبين=Port of Spain|ديلي=Dili|تبليسي=Tbilisi|كينغستون=Kingston|بريتوريا=Pretoria|جوهانسبرغ=Johannesburg|كيب تاون=Cape Town|جوبا=Juba|برازافيل=Brazzaville|كينشاسا=Kinshasa|بانغي=Bangui|كوبنهاغن=Copenhagen|روزو=Roseau|سانتو دومينغو=Santo Domingo|كيغالي=Kigali|بوخارست=Bucharest|لوساكا=Lusaka|هراري=Harare|داكار=Dakar|فريتاون=Freetown|سنغافورة=Singapore|براتيسلافا=Bratislava|ليوبليانا=Ljubljana|كولومبو=Colombo|برن=Bern|زيورخ=Zurich|جنيف=Geneva|باراماريبو=Paramaribo|سان سلفادور=San Salvador|فيكتوريا=Victoria|بلغراد=Belgrade|أكرا=Accra|كوناكري=Conakry|بيساو=Bissau|مالابو=Malabo|بانجول=Banjul|ليبرفيل=Libreville|مدينة غواتيمالا=Guatemala City|جورج تاون=Georgetown|هلسنكي=Helsinki|كاراكاس=Caracas|سوفا=Suva|نيقوسيا=Nicosia|بشكيك=Bishkek|أستانا=Astana|ألماتي=Almaty|زغرب=Zagreb|بنوم بنه=Phnom Penh|هافانا=Havana|سان خوسيه=San Jose|بوغوتا=Bogota|ياموسوكرو=Yamoussoukro|أبيدجان=Abidjan|ياوندي=Yaounde|دوالا=Douala|نيروبي=Nairobi|فيينتيان=Vientiane|ريغا=Riga|فيلنيوس=Vilnius|لوكسمبورغ=Luxembourg City|مونروفيا=Monrovia|ماسيرو=Maseru|أنتاناناريفو=Antananarivo|ليلونغوي=Lilongwe|باماكو=Bamako|فاليتا=Valletta|مكسيكو سيتي=Mexico City|أولان باتور=Ulaanbaatar|كيشيناو=Chisinau|مابوتو=Maputo|نايبيداو=Naypyidaw|يانغون=Yangon|ويندهوك=Windhoek|كاتماندو=Kathmandu|نيامي=Niamey|أبوجا=Abuja|لاغوس=Lagos|ماناغوا=Managua|ويلينغتون=Wellington|أوكلاند=Auckland|تيغوسيغالبا=Tegucigalpa|بورت أو برنس=Port-au-Prince|بودابست=Budapest|فيينا=Vienna|أوسلو=Oslo|لشبونة=Lisbon|أثينا=Athens|سكوبيه=Skopje|بودغوريتسا=Podgorica|بيونغ يانغ=Pyongyang|ساو تومي=Sao Tome|برايا=Praia|بورت لويس=Port Louis|تل أبيب=Tel Aviv|حيفا=Haifa|ماليه=Male|تايبيه=Taipei|أندورا لا فيلا=Andorra la Vella|فادوز=Vaduz|موناكو=Monaco|سان مارينو=San Marino|الفاتيكان=Vatican City|بريشتينا=Pristina|سانت جونز=Saint Johns|سانت جورجز=Saint Georges|باستير=Basseterre|كاستريز=Castries|كينغستاون=Kingstown|أبيا=Apia|نوكوألوفا=Nukualofa|بورت فيلا=Port Vila|هونيارا=Honiara|تاراوا=Tarawa|فونافوتي=Funafuti|ياريين=Yaren|نغيرولمود=Ngerulmud|ماجورو=Majuro|باليكير=Palikir");
+var HS="03d1e678bab099f8f7dd901f2a84dc2f84c3d139072cf3e584a8e8551f2b9fef",NM=["مدير النظام","محمد خالد عمر احمد عبده الحطامي","محمد خالد عمى احمد عبده الحطامي"];
+var lang="ar";try{lang=localStorage.getItem("lg")||"ar"}catch(e){}
+function L(a,e){return lang=="en"?e:a}
+var D={phone:"774365324",holder:"محمد خالد",methods:"حاسب - ون كاش - جوالي"};
+var all=[],fl={},cfg={},cat="",db=null,canW=true,me=null,adm=false,fco="",fci="",onAll=null;
+var $=function(i){return document.getElementById(i)};
+function E(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
+function I(n,s){var e=E("span","ic");s=s||20;e.innerHTML='<svg viewBox="0 0 24 24" width="'+s+'" height="'+s+'" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'+IC[n]+'</svg>';return e}
+function WA(s){var e=E("span","ic");e.innerHTML='<svg viewBox="0 0 24 24" width="'+s+'" height="'+s+'" fill="currentColor"><path d="'+WAP+'"/></svg>';return e}
+function C(k){return cfg[k]||D[k]}
+var CO={"اليمن":Object.keys(CC).filter(function(c){return c!="أخرى"})};
+W.split("|").forEach(function(x){var p=x.split(":");CO[p[0]]=p[1].split("،")});
+var COL=Object.keys(CO);
+function dn(x,c){return lang=="en"?((c?ENC:ENT)[x]||x):x}
+function fC(x){return dn(x,1)}function fT(x){return dn(x)}
+function nm(r){return r.kn||(K[r.k]||K.gas)[0]}
+function cn(n){for(var k in K)if(K[k][0]==n)return lang=="en"?K[k][2]:n;return n}
+function cic(n){for(var k in K)if(K[k][0]==n)return K[k][1];return"tag"}
+function loc(r){var co=r.co||"اليمن";return dn(r.c)+(co=="اليمن"?"":" - "+dn(co,1))}
+function cats(){var a=Object.keys(K).map(function(k){return K[k][0]});all.forEach(function(r){var n=nm(r);if(a.indexOf(n)<0)a.push(n)});return a}
+function stt(s){return{ok:L("متوفر","Available"),wa:L("طابور / محدود","Queue / limited"),no:L("غير متوفر","Unavailable")}[s]||""}
+var th=document.documentElement.dataset.theme||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");
+function setTh(t){th=t;document.documentElement.dataset.theme=t;var g=$("tg");g.textContent="";g.appendChild(I(t=="dark"?"sun":"moon",20));try{localStorage.setItem("th",t)}catch(e){}}
+$("tg").onclick=function(){setTh(th=="dark"?"light":"dark")};setTh(th);
+$("wa").appendChild(WA(22));
+function show(n){var b=$("mb");b.textContent="";b.appendChild(n);$("md").className="o"}
+function hide(){$("md").className="";onAll=null}
+$("md").onclick=function(e){if(e.target==this)hide()};
+function btn(c,x,f,ic){var b=E("button","go "+c);if(ic)b.appendChild(ic);b.appendChild(E("span",0,x));b.onclick=f;return b}
+function lnk(c,x,h,ic){var a=E("a","go "+c);a.href=h;a.target="_blank";a.rel="noopener";if(ic)a.appendChild(ic);a.appendChild(E("span",0,x));return a}
+function waLink(){return"https://wa.me/967"+C("phone")+"?text="+encodeURIComponent(L("السلام عليكم، أريد عرض إعلان في تطبيق خريطة الحاجة الآن","Hello, I want to advertise in the Needs Map Now app"))}
+function ban(){var b=$("bn");b.textContent="";
+if(cfg.url){var m=cfg.kind=="image"?E("img"):E("video");m.src=cfg.url;if(cfg.kind!="image"){m.muted=true;m.loop=true;m.autoplay=true;m.playsInline=true}b.appendChild(m)}
+else{var p=E("div","ph");p.appendChild(I("mega",34));p.appendChild(E("span",0,L("مساحة إعلانية","Ad space")));b.appendChild(p)}
+b.appendChild(E("span","tag",L("أعلن هنا","Advertise here")));$("wa").href=waLink()}
+$("bn").onclick=function(){var d=E("div");d.appendChild(E("h2",0,L("لعرض إعلانك هنا يجب الدفع","To show your ad here, payment is required")));
+d.appendChild(E("div","m",L("طرق الإيداع: ","Deposit methods: ")+C("methods")));d.appendChild(E("div","num",C("phone")));d.appendChild(E("div","m",L("الاسم: ","Name: ")+C("holder")));
+d.appendChild(btn("o2",L("نسخ الرقم","Copy number"),function(){try{navigator.clipboard.writeText(C("phone"));this.lastChild.textContent=L("تم النسخ","Copied")}catch(e){}},I("copy",18)));
+d.appendChild(lnk("g",L("تواصل معنا على واتساب","Contact us on WhatsApp"),waLink(),WA(20)));
+d.appendChild(E("div","m",L("بعد الإيداع أرسل لنا صورة الإشعار مع إعلانك وسيظهر خلال وقت قصير.","After depositing, send us the receipt with your ad and it will appear shortly.")));d.appendChild(btn("s",L("إغلاق","Close"),hide));show(d)};
+function tile(n,on,fn,ic){var b=E("button","tile"+(on?" on":""));b.appendChild(I(ic,22));b.appendChild(E("span",0,n));b.onclick=fn;return b}
+function tiles(){var h=$("ch");h.textContent="";h.appendChild(tile(L("الكل","All"),cat==="",function(){cat="";tiles();draw()},"globe"));
+cats().forEach(function(n){h.appendChild(tile(cn(n),cat===n,function(){cat=cat===n?"":n;tiles();draw()},cic(n)))})}
+function pick(title,items,cb,o){o=o||{};var f=o.fmt||function(x){return x},d=E("div");d.appendChild(E("h2",0,title));var si=E("input");si.placeholder=L("ابحث بالعربي أو English...","Search in Arabic or English...");d.appendChild(si);var ls=E("div","pk");d.appendChild(ls);
+function back(){if(o.back)show(o.back);else hide()}
+function row(t,v,c){var b=E("button","pr"+(c||""),t);b.onclick=function(){cb(v);back()};ls.appendChild(b)}
+function r(){ls.textContent="";var q=si.value.trim(),ql=q.toLowerCase(),a=items.filter(function(x){return!q||x.indexOf(q)>-1||((o.c?ENC:ENT)[x]||"").toLowerCase().indexOf(ql)>-1||f(x).toLowerCase().indexOf(ql)>-1});
+if(o.all&&!q)row(o.all,null," on");
+if(o.free&&q&&items.indexOf(q)<0)row(L("إضافة: ","Add: ")+q,q," on");
+a.slice(0,200).forEach(function(x){row(f(x),x)});
+if(!a.length&&!o.free)ls.appendChild(E("div","e",L("لا توجد نتائج","No results")))}
+si.oninput=r;r();d.appendChild(btn("s",L("رجوع","Back"),back));show(d)}
+function pb(ic,get,fn){var b=E("button","pb"),s=E("span",0);b.appendChild(I(ic,18));b.appendChild(s);b.appendChild(I("down",16));b.upd=function(){s.textContent=get()};b.onclick=fn;b.upd();return b}
+function fbar(){var f=$("fb");f.textContent="";
+var a=pb("globe",function(){return fco?fC(fco):L("كل الدول","All countries")},function(){pick(L("اختر الدولة","Choose country"),COL,function(v){fco=v||"";fci="";fbar();draw()},{all:L("كل الدول","All countries"),fmt:fC,c:1})});
+var b=pb("pin",function(){return fci?fT(fci):L("كل المدن","All cities")},function(){if(!fco)return;pick(L("اختر المدينة","Choose city"),CO[fco],function(v){fci=v||"";fbar();draw()},{all:L("كل المدن","All cities"),free:true,fmt:fT})});
+if(!fco)b.style.opacity=.5;f.appendChild(a);f.appendChild(b)}
+function ago(t){var s=(Date.now()-t)/1000;if(lang=="en"){if(s<90)return"now";if(s<3600)return Math.round(s/60)+" min ago";if(s<86400)return Math.round(s/3600)+" h ago";return Math.round(s/86400)+" d ago"}
+if(s<90)return"الآن";if(s<3600)return"قبل "+Math.round(s/60)+" دقيقة";if(s<86400)return"قبل "+Math.round(s/3600)+" ساعة";return"قبل "+Math.round(s/86400)+" يوم"}
+function mapUrl(r){var q=r.lat?r.lat+","+r.lng:encodeURIComponent(r.p+" "+(r.ds||"")+" "+loc(r));return"https://www.google.com/maps/search/?api=1&query="+q}
+function draw(){var Ls=$("ls");Ls.textContent="";
+var a=all.filter(function(r){return(!cat||nm(r)==cat)&&(!fco||(r.co||"اليمن")==fco)&&(!fci||r.c==fci)});
+if(!a.length){Ls.appendChild(E("div","e",L("لا توجد بلاغات بعد. كن أول من يبلّغ!","No reports yet. Be the first to report!")));return}
+a.forEach(function(r,i){var d=E("div","card"),x=E("div","r"),t=E("div","t");d.style.animationDelay=Math.min(i,8)*35+"ms";
+t.appendChild(I(cic(nm(r)),20));t.appendChild(E("span",0,cn(nm(r))+" — "+r.p));x.appendChild(t);x.appendChild(E("span","b "+r.st,stt(r.st)));d.appendChild(x);
+d.appendChild(E("div","m",loc(r)+(r.pr?" · "+L("السعر: ","Price: ")+r.pr:"")+" · "+ago(r.ts)));d.onclick=function(){rep(r)};Ls.appendChild(d)})}
+async function addRep(o){var rid=Date.now().toString(36)+Math.random().toString(36).slice(2,6);o.u=me;o.id=rid;
+var ref=db.doc("reports/"+me),s=await ref.get(),it=Object.assign({},(s.exists&&s.data()&&s.data().items)||{});it[rid]=o;
+var ks=Object.keys(it);if(ks.length>300){ks.sort(function(a,b){return it[a].ts-it[b].ts});for(var i=0;i<ks.length-300;i++)delete it[ks[i]]}
+await ref.set({items:it})}
+async function delRep(r){if(r.lg){await db.doc("reports/"+r.id).delete();return}
+var ref=db.doc("reports/"+r.d),s=await ref.get(),it=Object.assign({},(s.exists&&s.data()&&s.data().items)||{});delete it[r.id];await ref.set({items:it})}
+async function flagRep(r){var ref=db.doc("flags/"+me),s=await ref.get(),ids=Object.assign({},(s.exists&&s.data()&&s.data().ids)||{});ids[r.id]=Date.now();await ref.set({ids:ids})}
+function rep(r){var d=E("div"),ms=E("div","m");d.appendChild(E("h2",0,cn(nm(r))+" — "+r.p));
+d.appendChild(E("div","m",loc(r)+" · "+stt(r.st)+(r.pr?" · "+L("السعر: ","Price: ")+r.pr:"")+" · "+ago(r.ts)));
+if(r.ds)d.appendChild(E("div","m",L("وصف الموقع: ","Location: ")+r.ds));if(r.n)d.appendChild(E("div","m",r.n));
+var m=E("div","mp");m.appendChild(I("pin",38));m.appendChild(E("small",0,r.lat?r.lat.toFixed(5)+" , "+r.lng.toFixed(5):L("الموقع حسب الوصف والمدينة","Approximate (by name and city)")));d.appendChild(m);
+d.appendChild(lnk("",L("افتح الموقع على الخريطة","Open in maps"),mapUrl(r),I("nav",18)));
+if(me&&r.u===me)d.appendChild(btn("rd",L("حذف بلاغي","Delete my report"),function(){var q=E("div"),m2=E("div","m");q.appendChild(E("h2",0,L("حذف البلاغ؟","Delete this report?")));q.appendChild(E("div","m",L("سيختفي البلاغ للجميع ولا يمكن التراجع.","It will disappear for everyone.")));
+q.appendChild(btn("rd",L("نعم، احذف","Yes, delete"),async function(){try{if(db)await delRep(r);else{all=all.filter(function(x){return x!==r});tiles();draw()}hide()}catch(e){m2.textContent=L("تعذّر الحذف، حاول مرة أخرى","Could not delete, try again")}},I("trash",18)));q.appendChild(btn("s",L("تراجع","Cancel"),function(){rep(r)}));q.appendChild(m2);show(q)},I("trash",18)));
+else d.appendChild(btn("o2",L("إبلاغ عن بلاغ كاذب","Report as false"),async function(){var b=this;if(!db||!me){ms.textContent=L("سجّل الدخول أولاً","Sign in first");return}
+try{await flagRep(r);b.lastChild.textContent=L("تم الإبلاغ، شكراً لك","Reported, thank you")}catch(e){ms.textContent=L("تعذّر الإبلاغ","Could not report")}},I("flag",18)));
+d.appendChild(btn("s",L("إغلاق","Close"),hide));d.appendChild(ms);show(d)}
+$("add").onclick=function(){if(db&&(!canW||!me)){var q=E("div");q.appendChild(E("div","e",L("الإضافة متاحة فقط لمن لديه صلاحية مساهم ومسجّل الدخول.","Adding reports needs a contributor account and sign-in.")));q.appendChild(btn("s",L("إغلاق","Close"),hide));return show(q)}
+var pos=null,mode="d",S={n:"",o:false,co:"اليمن",ci:"",st:"ok"},d=E("div");d.appendChild(E("h2",0,L("بلاغ جديد","New report")));
+var p=E("input"),pr=E("input"),n=E("textarea"),ms=E("div","m"),sg=E("div","sg"),ss=E("div","sg"),box=E("div"),pi=E("input"),ds=E("textarea"),gs=E("div","m"),cg=E("div","tiles"),oth=E("input");
+function cgr(){cg.textContent="";cats().forEach(function(c){cg.appendChild(tile(cn(c),!S.o&&S.n===c,function(){S.n=c;S.o=false;oth.style.display="none";cgr()},cic(c)))});
+cg.appendChild(tile(L("نوع آخر","Other"),S.o,function(){S.o=true;S.n=oth.value.trim();oth.style.display="block";cgr()},"plus"))}
+oth.style.display="none";oth.maxLength=30;oth.placeholder=L("اكتب اسم الشيء المتوفر (مثال: خبز، أدوية)","Type what is available (e.g. bread, medicine)");oth.oninput=function(){S.n=oth.value.trim()};
+var bi=pb("pin",function(){return S.ci?fT(S.ci):L("اختر المدينة","Choose city")},function(){pick(L("اختر المدينة","Choose city"),CO[S.co],function(v){if(v){S.ci=v;bi.upd()}},{free:true,fmt:fT,back:d})});
+var bc=pb("globe",function(){return fC(S.co)},function(){pick(L("اختر الدولة","Choose country"),COL,function(v){if(v&&v!=S.co){S.co=v;S.ci="";bi.upd();pane()}bc.upd()},{fmt:fC,c:1,back:d})});
+p.placeholder=L("اسم المحطة أو المحل أو الشخص (مثال: محطة النور)","Station, shop or person name");p.maxLength=60;pr.placeholder=L("السعر (اختياري)","Price (optional)");pr.maxLength=30;n.placeholder=L("ملاحظة (اختياري)","Note (optional)");n.rows=2;n.maxLength=120;
+pi.placeholder=L("الصق الإحداثيات أو رابط الخريطة هنا","Paste coordinates or a map link");pi.style.direction="ltr";ds.placeholder=L("صف الموقع: بجانب جولة... أمام...","Describe the place: next to... in front of...");ds.rows=2;ds.maxLength=140;
+[["ok",stt("ok")],["wa",stt("wa")],["no",stt("no")]].forEach(function(a){var b=E("button",a[0]=="ok"?"on":"",a[1]);b.onclick=function(){S.st=a[0];ss.querySelectorAll("button").forEach(function(x){x.className=""});b.className="on"};ss.appendChild(b)});
+d.appendChild(E("div","m",L("ما الشيء المتوفر؟","What is available?")));d.appendChild(cg);d.appendChild(oth);cgr();
+d.appendChild(E("div","m",L("الدولة والمدينة","Country and city")));d.appendChild(bc);d.appendChild(bi);
+d.appendChild(E("div","m",L("اسم المحطة / المحل المتوفر عنده","Station / shop name")));d.appendChild(p);d.appendChild(E("div","m",L("الحالة","Status")));d.appendChild(ss);d.appendChild(pr);
+d.appendChild(E("div","m",L("موقع البلاغ","Report location")));d.appendChild(sg);d.appendChild(box);d.appendChild(n);
+function pane(){box.textContent="";sg.querySelectorAll("button").forEach(function(b){b.className=b.dataset.m==mode?"on":""});
+if(mode=="g"){box.appendChild(btn("o2",pos?L("تم تحديد موقعك","Location set"):L("تحديد موقعي الآن","Get my location"),function(){var b=this;try{navigator.geolocation.getCurrentPosition(function(g){pos=[g.coords.latitude,g.coords.longitude];b.lastChild.textContent=L("تم تحديد موقعك","Location set");gs.textContent=pos[0].toFixed(5)+" , "+pos[1].toFixed(5)},function(){gs.textContent=L("تعذّر تحديد الموقع، جرّب الخريطة أو الوصف","Location failed, try the map or a description")})}catch(e){gs.textContent=L("تعذّر تحديد الموقع","Location failed")}},I("gps",18)));box.appendChild(gs)}
+if(mode=="m"){var q=CC[S.ci];box.appendChild(lnk("o2",L("افتح الخريطة وحدد المكان","Open map and pick the place"),q?"https://www.google.com/maps/@"+q[0]+","+q[1]+",15z":"https://www.google.com/maps/search/?api=1&query="+encodeURIComponent((S.ci||"")+" "+S.co),I("map",18)));box.appendChild(E("div","m",L("اضغط مطولاً على المكان في الخريطة، ثم انسخ الإحداثيات اللي تظهر فوق والصقها هنا.","Long-press the place on the map, copy the coordinates shown on top and paste them here.")));box.appendChild(pi)}
+if(mode=="d")box.appendChild(ds)}
+[["g",L("موقعي","My location"),"gps"],["m",L("الخريطة","Map"),"map"],["d",L("وصف","Describe"),"edit"]].forEach(function(a){var b=E("button");b.dataset.m=a[0];b.appendChild(I(a[2],20));b.appendChild(E("span",0,a[1]));b.onclick=function(){mode=a[0];pane()};sg.appendChild(b)});
+pane();
+d.appendChild(btn("g",L("إرسال البلاغ","Send report"),async function(){var v=p.value.trim();
+if(!S.n){ms.textContent=L("اختر ما هو المتوفر","Choose what is available");return}if(!S.ci){ms.textContent=L("اختر المدينة","Choose a city");return}if(!v){ms.textContent=L("اكتب اسم المحطة أو المحل","Enter the station or shop name");return}
+var kk="x";for(var k in K)if(K[k][0]==S.n)kk=k;
+var o={k:kk,kn:S.n,co:S.co,c:S.ci,p:v,st:S.st,pr:pr.value.trim(),n:n.value.trim(),ts:Date.now()};
+if(mode=="g"&&pos){o.lat=pos[0];o.lng=pos[1]}
+if(mode=="m"){var mt=pi.value.match(/(-?\d{1,3}\.\d+)\s*[,،\s]\s*(-?\d{1,3}\.\d+)/);if(!mt){ms.textContent=L("لم نجد إحداثيات صحيحة","No valid coordinates found");return}o.lat=+mt[1];o.lng=+mt[2]}
+if(mode=="d"&&ds.value.trim())o.ds=ds.value.trim();
+try{if(db)await addRep(o);else{o.id=String(Date.now());all.unshift(o);tiles();draw()}hide()}catch(e){ms.textContent=L("تعذّر الإرسال، حاول مرة أخرى","Could not send, try again")}},I("check",18)));
+d.appendChild(btn("s",L("إلغاء","Cancel"),hide));d.appendChild(ms);show(d)};
+function nn(x){return x.replace(/\s+/g,"").replace(/[أإآ]/g,"ا")}
+async function sha(x){try{var b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode("needsmap:"+x));return Array.from(new Uint8Array(b)).map(function(v){return("0"+v.toString(16)).slice(-2)}).join("")}catch(e){return""}}
+var bad=0,lock=0;
+async function chk(n,p){if(Date.now()<lock)return"lock";var ok=NM.map(nn).indexOf(nn(n))>-1&&(await sha(p))==HS;
+if(!ok){if(++bad>=5){lock=Date.now()+60000;bad=0}return"bad"}
+if(window.__adminAuth){try{await window.__adminAuth(p)}catch(e){return"srv"}}adm=true;return"ok"}
+async function upl(f){if(window.__upload)return await window.__upload(f);var A=await claude.use("assets");var r=await A.upload(f);return r.url}
+$("sh").onclick=function(){if(adm)return adminUI();var d=E("div"),ms=E("div","m"),nI=E("input"),pI=E("input");d.appendChild(E("h2",0,L("مدير النظام","System admin")));
+nI.placeholder=L("اسم المستخدم","Username");pI.type="password";pI.placeholder=L("كلمة السر","Password");pI.style.direction="ltr";d.appendChild(nI);d.appendChild(pI);
+d.appendChild(btn("",L("دخول","Sign in"),async function(){ms.textContent="...";var r=await chk(nI.value,pI.value);
+if(r=="ok"){pI.value="";adminUI()}else ms.textContent=r=="lock"?L("محاولات كثيرة، انتظر دقيقة","Too many attempts, wait a minute"):r=="srv"?L("تعذّر تسجيل الدخول للخادم","Server sign-in failed"):L("الاسم أو كلمة السر غير صحيحة","Wrong username or password")},I("shield",18)));
+d.appendChild(btn("s",L("إغلاق","Close"),hide));d.appendChild(ms);show(d)};
+function adminUI(){var d=E("div"),ms=E("div","m"),f=E("input"),ph=E("input"),ho=E("input"),me2=E("input"),lst=E("div");
+d.appendChild(E("h2",0,L("مدير النظام","System admin")));d.appendChild(E("div","m",L("مرحباً محمد خالد عمر أحمد عبده الحطامي","Welcome Mohammed Khaled Omar Ahmed Abdo Al-Hattami")));
+d.appendChild(E("div","m",L("الإعلان العلوي (فيديو أو صورة)","Top ad (video or image)")));f.type="file";f.accept="video/*,image/*";ph.value=C("phone");ho.value=C("holder");me2.value=C("methods");
+ph.placeholder=L("رقم الإيداع والواتساب","Deposit / WhatsApp number");ho.placeholder=L("الاسم","Name");me2.placeholder=L("طرق الإيداع","Deposit methods");ph.style.direction="ltr";
+[f,ph,ho,me2].forEach(function(x){d.appendChild(x)});
+async function sv(o){cfg=Object.assign({},cfg,o);await db.doc("config/main").set(cfg);ban()}
+d.appendChild(btn("g",L("حفظ","Save"),async function(){ms.textContent="...";try{var o={phone:ph.value.trim(),holder:ho.value.trim(),methods:me2.value.trim()};var fl0=f.files[0];if(fl0){o.url=await upl(fl0);o.kind=fl0.type.indexOf("image")==0?"image":"video"}await sv(o);ms.textContent=L("تم الحفظ","Saved")}catch(e){ms.textContent=L("تعذّر الحفظ. تأكد أنك مالك التطبيق.","Could not save. Make sure you are the app owner.")}},I("check",18)));
+d.appendChild(btn("o2",L("إزالة الإعلان الحالي","Remove current ad"),async function(){try{await sv({url:"",kind:""});ms.textContent=L("تمت الإزالة","Removed")}catch(e){ms.textContent=L("تعذّرت الإزالة","Could not remove")}},I("trash",18)));
+d.appendChild(E("h2",0,L("البلاغات (الأكثر إبلاغاً أولاً)","Reports (most flagged first)")));d.appendChild(lst);
+function lr(){lst.textContent="";all.slice().sort(function(a,b){return(fl[b.id]||0)-(fl[a.id]||0)||b.ts-a.ts}).slice(0,100).forEach(function(r){var row=E("div","r"),c=0,x=E("button","ib");row.style.borderBottom="1px solid var(--bd)";row.style.padding="6px 0";
+row.appendChild(E("div","m",cn(nm(r))+" — "+r.p+" · "+loc(r)+" · "+L("بلاغات: ","Flags: ")+(fl[r.id]||0)));x.appendChild(I("trash",18));
+x.onclick=async function(){if(!c){c=1;x.style.background="#dc2626";x.style.color="#fff";return}try{if(db)await delRep(r);else all=all.filter(function(z){return z!==r});tiles();draw();lr()}catch(e){ms.textContent=L("تعذّر الحذف. تأكد أنك مالك التطبيق.","Could not delete. Make sure you are the app owner.")}};
+row.appendChild(x);lst.appendChild(row)})}
+lr();d.appendChild(btn("s",L("تسجيل الخروج","Sign out"),function(){adm=false;hide()}));d.appendChild(btn("s",L("إغلاق","Close"),hide));d.appendChild(ms);show(d);onAll=lr}
+function renderAll(){var h=document.documentElement;h.lang=lang;h.dir=lang=="en"?"ltr":"rtl";document.title=L("خريطة الحاجة الآن","Needs Map Now");
+var t=$("ti");t.textContent="";t.appendChild(I("pin",24));t.appendChild(E("span",0,L("خريطة الحاجة الآن","Needs Map Now")));
+var a=$("add");a.textContent="";a.appendChild(I("plus",20));a.appendChild(E("span",0,L("بلّغ الآن","Report now")));
+var s=$("sh");s.textContent="";s.appendChild(I("shield",16));s.appendChild(E("span",0,L("مدير النظام","System admin")));
+$("lg").textContent=lang=="en"?"ع":"EN";tiles();fbar();draw();ban()}
+$("lg").onclick=function(){lang=lang=="en"?"ar":"en";try{localStorage.setItem("lg",lang)}catch(e){}renderAll()};
+renderAll();
+window.__boot=async function(){if(typeof claude=="undefined")return;
+try{var u=await claude.use("user");if(u){if(u.can("data.write")===false)canW=false;try{me=await u.id()}catch(e){}}}catch(e){}
+try{db=await claude.use("db");if(db){
+db.collection("reports").onSnapshot(function(s){all=[];s.docs.forEach(function(d){var x=d.data()||{};if(x.items){for(var k in x.items)all.push(Object.assign({},x.items[k],{id:k,d:d.id}))}else if(x.p)all.push(Object.assign({},x,{id:d.id,d:d.id,lg:1}))});all.sort(function(a,b){return(b.ts||0)-(a.ts||0)});tiles();draw();if(onAll)onAll()},function(){});
+db.collection("flags").onSnapshot(function(s){fl={};s.docs.forEach(function(d){var ids=(d.data()||{}).ids||{};for(var k in ids)fl[k]=(fl[k]||0)+1});if(onAll)onAll()},function(){});
+db.doc("config/main").onSnapshot(function(s){cfg=s.exists?Object.assign({},s.data()):{};ban()},function(){})}}catch(e){}
+};
+</script>
+<script type="module" src="shim.js"></script>
+<script>if("serviceWorker" in navigator)navigator.serviceWorker.register("sw.js")</script>
+</body>
+</html>
